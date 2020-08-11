@@ -9,9 +9,27 @@ Route::get('/', function () {
 Route::prefix('admin')->namespace('Admin')->group(function(){
 
     /**
+     * Route Permissions
+     */
+    Route::any('permissions/search','ACL\PermissionController@search')->name('permissions.search');
+    Route::resource('permissions','ACL\PermissionController');
+
+    /**
+     * Route Profiles
+     */
+    Route::any('profiles/search','ACL\ProfileController@search')->name('profiles.search');
+    Route::resource('profiles','ACL\ProfileController');
+
+    /**
      * Route Detail Plans
      */
-    Route::get('plans/{url}/details','DetailPlanController@index')->name('details.plan.index');
+    Route::delete('plans/{url}/details/{idDetail}','DetailsPlanController@delete')->name('details.plan.delete');
+    Route::get('plans/{url}/details/{idDetail}/show','DetailsPlanController@show')->name('details.plan.show');
+    Route::put('plans/{url}/details/{idDetail}','DetailsPlanController@update')->name('details.plan.update');
+    Route::get('plans/{url}/details/{idDetail}/edit','DetailsPlanController@edit')->name('details.plan.edit');
+    Route::post('plans/{url}/details','DetailsPlanController@store')->name('details.plan.store');
+    Route::get('plans/{url}/details/create','DetailsPlanController@create')->name('details.plan.create');
+    Route::get('plans/{url}/details','DetailsPlanController@index')->name('details.plan.index');
 
     /**
      * Route PLans
@@ -25,7 +43,6 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
     Route::get('plans/{url}','PlanController@show')->name('plans.show');
     Route::delete('plans/{url}','PlanController@delete')->name('plans.delete');
 
- 
     /**
      * Home Dashboard
      */

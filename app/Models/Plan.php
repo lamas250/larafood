@@ -10,7 +10,7 @@ class Plan extends Model
 
     public function details()
     {
-        return $this->hasMany(DetailsPlan::class);
+        return $this->hasMany(DetailPlan::class);
     }
 
     public function search($filter = null)

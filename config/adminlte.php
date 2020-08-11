@@ -242,6 +242,18 @@ return [
             'icon' => 'fas fa-list-alt'
             // 'can'  => 'manage-plans',
         ],
+        [
+            'text' => 'Perfis',
+            'url'  => 'admin/profiles',
+            'icon' => 'fas fa-address-book'
+            // 'can'  => 'manage-plans',
+        ],
+        [
+            'text' => 'Permissões',
+            'url'  => 'admin/permissions',
+            'icon' => 'fas fa-lock'
+            // 'can'  => 'manage-plans',
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
