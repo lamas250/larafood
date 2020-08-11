@@ -24,12 +24,12 @@ class StoreUpdatePlan extends FormRequest
     public function rules()
     {
         // buscar o seguimento na url com parametro.
-        $id = $this->segment(3);
+        $url = $this->segment(3);
         
 
         return [
             // usar "" para ler o argumento.
-            'name' => "required|min:3|max:255|unique:plans,name,{$id},id",
+            'name' => "required|min:3|max:255|unique:plans,name,{$url},url",
             'description' => 'nullable|min:3|max:255',
             'price' => "required|regex:/^\d+(\.\d{1,2})?$/"
         ];

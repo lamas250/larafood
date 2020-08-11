@@ -54,9 +54,9 @@ class PlanController extends Controller
         ]);
     }
 
-    public function delete($id)
+    public function delete($url)
     {
-        $plan = $this->repository->where('id',$id)->first();
+        $plan = $this->repository->where('url',$url)->first();
 
         if(!$plan)
             return redirect()->back();
@@ -77,9 +77,9 @@ class PlanController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function edit($url)
     {
-        $plan = $this->repository->where('id',$id)->first();
+        $plan = $this->repository->where('url',$url)->first();
 
         if(!$plan)
             return redirect()->back();
@@ -89,9 +89,9 @@ class PlanController extends Controller
         ]);
     }
 
-    public function update(StoreUpdatePlan $request,$id)
+    public function update(StoreUpdatePlan $request,$url)
     {
-        $plan = $this->repository->where('id',$id)->first();
+        $plan = $this->repository->where('url',$url)->first();
 
         if(!$plan)
             return redirect()->back();
