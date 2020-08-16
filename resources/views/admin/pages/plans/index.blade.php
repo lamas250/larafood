@@ -34,10 +34,11 @@
                         <tr>
                             <td>{{$value->name}}</td>
                             <td>{{number_format($value->price,2,',','.')}}</td>
-                            <td style="width: 250px;">
+                            <td style="width: 350px;">
                                 <a href="{{route('plans.show',$value->url)}}" class="btn btn-warning">VER</a>
                                 <a href="{{route('details.plan.index',$value->url)}}" class="btn btn-success">Detalhes</a>
                                 <a href="{{route('plans.edit',$value->url)}}" class="btn btn-info">Edit</a>
+                                <a href="{{ route('plans.profiles', $value->id) }}" class="btn btn-warning"><i class="fas fa-address-book"></i></a>
                             </td>
                         </tr>
                     @endforeach

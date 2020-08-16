@@ -34,8 +34,8 @@
                             <td>{{$value->name}}</td>
                             <td style="width: 250px;">
                                 <a href="{{route('permissions.show',$value->id)}}" class="btn btn-warning">VER</a>
-                                {{-- <a href="{{route('details.profiles.index',$value->id)}}" class="btn btn-success">Detalhes</a> --}}
                                 <a href="{{route('permissions.edit',$value->id)}}" class="btn btn-info">Edit</a>
+                                 <a href="{{route('permissions.profiles',$value->id)}}" class="btn btn-success"><i class="fas fa-address-book"></i></a>
                             </td>
                         </tr>
                     @endforeach
