@@ -9,6 +9,14 @@ class Plan extends Model
     protected $fillable = ['name','price','url','description'];
 
     /**
+     * Get Tenants
+     */
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
+
+    /**
      * Get Details of Plan
      */
     public function details()
