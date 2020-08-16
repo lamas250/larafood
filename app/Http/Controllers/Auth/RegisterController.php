@@ -54,9 +54,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cnpj' => ['required','unique:tenants'],
-            'company' => ['required','unique:tenants,name']
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'cnpj' => ['required','numeric','unique:tenants'],
+            'company' => ['required','string','unique:tenants,name','min:14','max:14']
         ]);
     }
 

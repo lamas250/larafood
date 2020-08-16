@@ -254,6 +254,12 @@ return [
             'icon' => 'fas fa-lock'
             // 'can'  => 'manage-plans',
         ],
+        [
+            'text' => 'Usuarios',
+            'url'  => 'admin/users',
+            'icon' => 'fas fa-user'
+            // 'can'  => 'manage-plans',
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
