@@ -260,6 +260,12 @@ return [
             'icon' => 'fas fa-user'
             // 'can'  => 'manage-plans',
         ],
+        [
+            'text' => 'Categorias',
+            'url'  => 'admin/categories',
+            'icon' => 'fas fa-layer-group'
+            // 'can'  => 'manage-plans',
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
