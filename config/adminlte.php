@@ -266,6 +266,18 @@ return [
             'icon' => 'fas fa-layer-group'
             // 'can'  => 'manage-plans',
         ],
+        [
+            'text' => 'Produtos',
+            'url'  => 'admin/products',
+            'icon' => 'fas fa-store'
+            // 'can'  => 'manage-plans',
+        ],
+        [
+            'text' => 'Mesas',
+            'url'  => 'admin/tables',
+            'icon' => 'fas fa-tablet'
+            // 'can'  => 'manage-plans',
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',

@@ -26,7 +26,7 @@ class PlanObserver
      * @param  \App\Models\Plan  $plan
      * @return void
      */
-    public function updating(Plan $plan)
+    public function updated(Plan $plan)
     {
         $plan->url = \Str::kebab($plan->name);
     }
