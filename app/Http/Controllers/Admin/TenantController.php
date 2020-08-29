@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Table;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateTable;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreUpdateTenant;
 
-class TableController extends Controller
+class TenantController extends Controller
 {
     protected $repository;
 
-    public function __construct(Table $table)
+    public function __construct(Tenant $tenant)
     {
-        $this->repository = $table;
+        $this->repository = $tenant;
 
-        $this->middleware(['can:tables']);
+        $this->middleware(['can:tenants']);
     }
 
     /**
@@ -25,9 +26,9 @@ class TableController extends Controller
      */
     public function index()
     {
-        $tables = $this->repository->latest()->paginate();
+        $tenants = $this->repository->latest()->paginate();
 
-        return view('admin.pages.tables.index',compact('tables'));
+        return view('admin.pages.tenants.index',compact('tenants'));
     }
 
     /**
@@ -37,20 +38,21 @@ class TableController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.tables.create');
+        return view('admin.pages.tenants.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateTable  $request
+     * @param  \App\Http\Requests\StoreUpdateTenant  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateTable $request)
+    public function store(StoreUpdateTenant $request)
     {
+        // dd($request->all());
         $this->repository->create($request->all());
 
-        return redirect()->route('tables.index');
+        return redirect()->route('tenants.index');
     }
 
     /**
@@ -61,11 +63,11 @@ class TableController extends Controller
      */
     public function show($id)
     {
-        if(!$table = $this->repository->find($id)){
+        if(!$tenant = $this->repository->with('plan')->find($id)){
             return redirect()->back();
         };
 
-        return view('admin.pages.tables.show',compact('table'));
+        return view('admin.pages.tenants.show',compact('tenant'));
     }
 
     /**
@@ -76,11 +78,11 @@ class TableController extends Controller
      */
     public function edit($id)
     {
-        if(!$table = $this->repository->find($id)){
+        if(!$tenant = $this->repository->find($id)){
             return redirect()->back();
         };
 
-        return view('admin.pages.tables.edit',compact('table'));
+        return view('admin.pages.tenants.edit',compact('tenant'));
     }
 
     /**
@@ -90,14 +92,24 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateTable $request, $id)
+    public function update(StoreUpdateTenant $request, $id)
     {
-        if(!$table = $this->repository->find($id)){
+        if(!$tenant = $this->repository->find($id)){
             return redirect()->back();
-        };
-        $table->update($request->all());
+        }
 
-        return redirect()->route('tables.index');
+        $data = $request->all();
+
+        if($request->hasFile('logo') && $request->logo->isValid()){
+            if(Storage::exists($tenant->logo)){
+                Storage::delete($tenant->logo);
+            };
+            $data['logo'] = $request->logo->store("tenants/{$tenant->uuid}");
+        };
+
+        $tenant->update($data);
+
+        return redirect()->route('tenants.index');
     }
 
     /**
@@ -108,26 +120,31 @@ class TableController extends Controller
      */
     public function destroy($id)
     {
-        if(!$table = $this->repository->find($id)){
+        if(!$tenant = $this->repository->find($id)){
             return redirect()->back();
         };
-        $table->delete();
 
-        return redirect()->route('tables.index');
+        if(Storage::exists($tenant->logo)){
+            Storage::delete($tenant->logo);
+        };
+        
+        $tenant->delete();
+
+        return redirect()->route('tenants.index');
     }
 
     public function search(Request $request)
     {
         $filters = $request->only('filter');
 
-        $tables = $this->repository
+        $tenants = $this->repository
                         ->where(function($query) use ($request){
                             if($request->filter){
-                                $query->where('identify','LIKE',"%{$request->filter}%");
-                                $query->orWhere('description','LIKE',"%{$request->filter}%");
+                                $query->where('name','LIKE',"%{$request->filter}%");
                             }
                         })->paginate();
         
-        return view('admin.pages.tables.index',compact('tables','filters'));
+        return view('admin.pages.tenants.index',compact('tenants','filters'));
     }
 }
+

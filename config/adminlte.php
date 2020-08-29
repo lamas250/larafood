@@ -231,52 +231,58 @@ return [
     */
 
     'menu' => [
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        //     'topnav' => true,
+        // ],
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'text' => 'Empresas',
+            'url'  => 'admin/tenants',
+            'icon' => 'fas fa-building',
+            'can'  => 'tenants',
         ],
         [
             'text' => 'Planos',
             'url'  => 'admin/plans',
-            'icon' => 'fas fa-list-alt'
-            // 'can'  => 'manage-plans',
+            'icon' => 'fas fa-list-alt',
+            'can'  => 'plans',
         ],
         [
             'text' => 'Perfis',
             'url'  => 'admin/profiles',
-            'icon' => 'fas fa-address-book'
-            // 'can'  => 'manage-plans',
+            'icon' => 'fas fa-address-book',
+            'can'  => 'profiles',
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permissions',
-            'icon' => 'fas fa-lock'
-            // 'can'  => 'manage-plans',
+            'icon' => 'fas fa-lock',
+            'can'  => 'permissions',
         ],
         [
             'text' => 'Usuarios',
             'url'  => 'admin/users',
-            'icon' => 'fas fa-user'
-            // 'can'  => 'manage-plans',
+            'icon' => 'fas fa-user',
+            'can'  => 'users',
         ],
         [
             'text' => 'Categorias',
             'url'  => 'admin/categories',
-            'icon' => 'fas fa-layer-group'
-            // 'can'  => 'manage-plans',
+            'icon' => 'fas fa-layer-group',
+            'can'  => 'categories',
         ],
         [
             'text' => 'Produtos',
             'url'  => 'admin/products',
-            'icon' => 'fas fa-store'
-            // 'can'  => 'manage-plans',
+            'icon' => 'fas fa-store',
+            'can'  => 'products',
         ],
         [
             'text' => 'Mesas',
             'url'  => 'admin/tables',
-            'icon' => 'fas fa-tablet'
-            // 'can'  => 'manage-plans',
+            'icon' => 'fas fa-tablet',
+            'can'  => 'tables',
         ],
         // [
         //     'text'        => 'pages',

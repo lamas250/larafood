@@ -14,6 +14,8 @@ class CategoryController extends Controller
     public function __construct(Category $category)
     {
         $this->repository = $category;
+
+        $this->middleware(['can:categories']);
     }
 
     /**
@@ -23,6 +25,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // Gate::allows('permissao');
+        // $this->authorize('permissao);
         $categories = $this->repository->latest()->paginate();
 
         return view('admin.pages.categories.index',compact('categories'));

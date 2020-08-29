@@ -7,6 +7,17 @@ Route::prefix('admin')
         ->middleware('auth')
         ->group(function(){
 
+    // Route::get('teste-acl',function(){
+    //     dd(auth()->user()->isAdmin());
+    // });
+
+
+    /**
+     * Route Table
+     */
+    Route::any('tenants/search','TenantController@search')->name('tenants.search');
+    Route::resource('tenants','TenantController');
+
     /**
      * Route Table
      */
@@ -38,7 +49,7 @@ Route::prefix('admin')
     Route::resource('categories','CategoryController');
     
     /**
-     * Route Profiles
+     * Route Usuarios
      */
     Route::any('users/search','UserController@search')->name('users.search');
     Route::resource('users','UserController');
@@ -64,14 +75,14 @@ Route::prefix('admin')
     /**
      * Route Permissions
      */
-    Route::any('permissions/search','ACL\PermissionController@search')->name('permissions.search');
-    Route::resource('permissions','ACL\PermissionController');
+    Route::any('permissions/search','ACL\PermissionController@search')->name('permissions.search')->middleware('can:permissions');
+    Route::resource('permissions','ACL\PermissionController')->middleware('can:permissions');
 
     /**
      * Route Profiles
      */
-    Route::any('profiles/search','ACL\ProfileController@search')->name('profiles.search');
-    Route::resource('profiles','ACL\ProfileController');
+    Route::any('profiles/search','ACL\ProfileController@search')->name('profiles.search')->middleware('can:profiles');
+    Route::resource('profiles','ACL\ProfileController')->middleware('can:profiles');
 
     /**
      * Route Detail Plans
