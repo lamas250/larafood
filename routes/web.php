@@ -4,13 +4,13 @@ use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
     // Teste get por Sanctum Laravel
-    Route::get('teste',function(){
-        $client = Client::first();
+    // Route::get('teste',function(){
+    //     $client = Client::first();
 
-        $token = $client->createToken('token-teste',['*']);
+    //     $token = $client->createToken('token-teste',['*']);
 
-        dd($token->plainTextToken);
-    });
+    //     dd($token->plainTextToken);
+    // });
 
 Route::prefix('admin')
         ->namespace('Admin')

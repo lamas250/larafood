@@ -17,7 +17,18 @@ Route::group([
     Route::get('/products','ProductsApiController@productsByTenant');
 
     Route::post('/client','Auth\RegisterController@store');
+
 });
+
+Route::post('/auth/token', 'Api\Auth\AuthClientController@auth');
+
+Route::group([
+    'middleware' => ['auth:sanctum']
+],function(){
+    Route::get('/auth/me', 'Api\Auth\AuthClientController@me');
+    Route::post('/auth/logout','Api\Auth\AuthClientController@logout');
+});
+
 
 // Possivel versao 2, mantendo a versao 1
 Route::group([
