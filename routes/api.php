@@ -15,6 +15,8 @@ Route::group([
 
     Route::get('/product/{flag}','ProductsApiController@show');
     Route::get('/products','ProductsApiController@productsByTenant');
+
+    Route::post('/client','Auth\RegisterController@store');
 });
 
 // Possivel versao 2, mantendo a versao 1
