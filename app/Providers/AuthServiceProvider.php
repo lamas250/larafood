@@ -27,6 +27,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // Para retornar true se tiver comando rodando, migrate no caso.
+        if($this->app->runningInConsole()) return;
+
         $permissions = Permission::all(); 
         foreach($permissions as $permission){
             Gate::define($permission->name, function(User $user) use ($permission){

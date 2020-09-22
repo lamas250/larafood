@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tenant_id');
+            $table->uuid('uuid');
             $table->string('name')->unique();
             $table->string('flag');
             $table->string('image');
@@ -43,7 +44,7 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
         Schema::dropIfExists('category_product');
+        Schema::dropIfExists('products');
     }
 }
